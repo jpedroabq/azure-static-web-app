@@ -3,524 +3,587 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Corporation</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.png">
-    <meta name="description" content="Unifique seus fluxos de trabalho de LLM com segurança. Conecte OpenAI, Anthropic e Google em um único portal corporativo e privado.">
-    <meta name="keywords" content="portal LLM seguro, chat corporativo AI, acesso multi-modelo, IA empresarial, OpenAI, Anthropic, Google">
-    
-    <!-- Tailwind CSS -->
+    <title>Nexa - Automatize seu Atendimento no WhatsApp</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="styles.css">
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-bg {
-            background: linear-gradient(135deg, #00D4FF 0%, #8B5CF6 50%, #F472B6 100%);
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
         }
-        .gradient-text {
-            background: linear-gradient(135deg, #00D4FF 0%, #8B5CF6 50%, #F472B6 100%);
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            border: 0.01rem solid white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #10b981;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .stats-counter {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .dark-bg {
-            background-color: #0D0E15;
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 400px;
+            width: 100%;
         }
-        .card-hover {
-            transition: all 0.3s ease;
+        
+        .testimonials-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
         }
-        .card-hover:hover {
-            transform: translateY(-8px);
+        
+        /* Responsive testimonial layout */
+        @media (min-width: 768px) {
+            .testimonials-container {
+                justify-content: center;
+            }
+            
+            .testimonials-container .testimonial-card {
+                flex: 0 1 calc(50% - 1rem);
+                max-width: 400px;
+            }
         }
-        .smooth-scroll {
-            scroll-behavior: smooth;
+        
+        @media (min-width: 1024px) {
+            .testimonials-container .testimonial-card {
+                flex: 0 1 calc(33.333% - 1.333rem);
+                max-width: 350px;
+            }
+        }
+        
+        /* Center cards when there are only 2 */
+        .testimonials-container:has(.testimonial-card:nth-child(2):last-child) {
+            justify-content: center;
+        }
+        
+        .testimonials-container:has(.testimonial-card:nth-child(2):last-child) .testimonial-card {
+            max-width: 400px;
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
         }
     </style>
 </head>
-
-<body class="dark-bg text-white smooth-scroll">
+<body class="bg-gray-50">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
                 <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <h2 class="text-2xl font-bold gradient-text">Nexus Corporation</h2>
+                    <div class="flex-shrink-0 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle text-primary">
+                                    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z">
+                                    </path>
+                                </svg>
+                        <span class="text-xl font-bold text-gray-900">Nexa</span>
                     </div>
                 </div>
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#funcionalidades" class="text-gray-300 hover:text-white transition-colors">Funcionalidades</a>
-                        <a href="#como-funciona" class="text-gray-300 hover:text-white transition-colors">Como Funciona</a>
-                        <a href="#precos" class="text-gray-300 hover:text-white transition-colors">Preços</a>
-                        <a href="#contato" class="text-gray-300 hover:text-white transition-colors">Contato</a>
+                        <a href="#funcionalidades" class="text-gray-700 hover:text-emerald-600 px-3 py-2 text-sm font-medium transition-colors">Funcionalidades</a>
+                        <a href="#beneficios" class="text-gray-700 hover:text-emerald-600 px-3 py-2 text-sm font-medium transition-colors">Benefícios</a>
+                        <a href="#contato" class="text-gray-700 hover:text-emerald-600 px-3 py-2 text-sm font-medium transition-colors">Contato</a>
+                        <button class="btn-primary text-white px-6 py-2 rounded-lg text-sm font-medium">
+                            Começar Agora
+                        </button>
                     </div>
                 </div>
                 
                 <!-- Mobile menu button -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-300 hover:text-white">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-emerald-600 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-black/90 backdrop-blur-md">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#funcionalidades" class="block px-3 py-2 text-gray-300 hover:text-white">Funcionalidades</a>
-                <a href="#como-funciona" class="block px-3 py-2 text-gray-300 hover:text-white">Como Funciona</a>
-                <a href="#precos" class="block px-3 py-2 text-gray-300 hover:text-white">Preços</a>
-                <a href="#contato" class="block px-3 py-2 text-gray-300 hover:text-white">Contato</a>
+        <div id="mobile-menu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-full bg-white shadow-xl z-40">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#funcionalidades" class="block text-gray-700 hover:text-emerald-600 py-2 text-sm font-medium">Funcionalidades</a>
+                <a href="#beneficios" class="block text-gray-700 hover:text-emerald-600 py-2 text-sm font-medium">Benefícios</a>
+                <a href="#contato" class="block text-gray-700 hover:text-emerald-600 py-2 text-sm font-medium">Contato</a>
+                <button class="btn-primary text-white px-6 py-2 rounded-lg text-sm font-medium w-full">
+                    Começar Agora
+                </button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 gradient-bg opacity-10"></div>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                Unifique seus fluxos de trabalho de 
-                <span class="gradient-text">IA com segurança</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
-                Conecte modelos como ChatGPT, Claude, e outros em um único portal corporativo e privado.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#contato" class="gradient-bg text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity">
-                    Solicitar Demonstração
-                </a>
-                <a href="#precos" class="border border-white/30 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/10 transition-colors">
-                    Ver Preços
-                </a>
+    <section class="hero-gradient pt-20 pb-16 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+                <!-- Left Content -->
+                <div class="text-white space-y-8">
+                    <div class="space-y-2">
+                        <p class="text-emerald-200 text-sm font-medium flex items-center">
+                            <i class="fas fa-bolt mr-2"></i>
+                            Automatize seu atendimento
+                        </p>
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                            Atendimento Inteligente para
+                            <span class="text-green-300">WhatsApp</span>
+                        </h1>
+                    </div>
+                    
+                    <p class="text-xl text-emerald-100 leading-relaxed">
+                        Automatize respostas, qualifique leads e aumente suas vendas 24/7 com nosso chatbot inteligente para WhatsApp. Integração fácil e resultados imediatos.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="btn-primary text-white px-8 py-4 rounded-lg text-lg font-semibold flex items-center justify-center">
+                            <i class="fas fa-play mr-2"></i>
+                            Começar Agora
+                        </button>
+                        <button class="btn-secondary px-8 py-4 rounded-lg text-lg font-semibold flex items-center justify-center bg-transparent">
+                            <i class="fas fa-video mr-2"></i>
+                            Solicitar Demonstração
+                        </button>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-6 text-sm">
+                        <div class="flex items-center text-emerald-200">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Setup em 1 hora
+                        </div>
+                        <div class="flex items-center text-emerald-200">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Sem programação
+                        </div>
+                        <div class="flex items-center text-emerald-200">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Suporte Premium
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Content - Robot Illustration -->
+                <div class="flex justify-center lg:justify-end">
+                    <div class="relative">
+                        <div class="w-80 h-80 relative bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-3xl flex items-center justify-center animate-float overflow-hidden">
+                            <!-- img now fills the top-layer div -->
+                            <img src="assets/hero-chatbot.jpg" alt="Nexa Chatbot" class="absolute inset-0 w-full h-full object-cover">
+                            <div class="absolute -top-4 -right-4 w-16 h-16 bg-emerald-400 rounded-full flex items-center justify-center animate-pulse">
+                            <i class="fab fa-whatsapp text-2xl text-white"></i>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-emerald-400 rounded-full animate-pulse">
+                        </div>
+                        <div class="absolute top-8 -left-8 w-8 h-8 bg-emerald-400 rounded-full animate-pulse" style="animation-delay: 1s;">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <!-- Decorative elements -->
-        <div class="absolute top-1/4 left-10 w-32 h-32 gradient-bg rounded-full opacity-20 blur-xl"></div>
-        <div class="absolute bottom-1/4 right-10 w-48 h-48 gradient-bg rounded-full opacity-20 blur-xl"></div>
     </section>
 
-    <!-- Funcionalidades Section -->
-    <section id="funcionalidades" class="py-20 bg-gray-900/50">
+    <!-- Features Section -->
+    <section id="funcionalidades" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                    Funcionalidades <span class="gradient-text">Avançadas</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Funcionalidades Poderosas
                 </h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Tudo que você precisa para usar IA corporativa com segurança e eficiência
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Tudo que você precisa para automatizar seu atendimento e aumentar suas vendas
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="card-hover bg-gray-800/50 p-8 rounded-xl border border-gray-700/50">
-                    <div class="gradient-bg w-12 h-12 rounded-lg flex items-center justify-center mb-6">
-                        <i data-lucide="layers" class="w-6 h-6 text-white"></i>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-comments text-2xl text-emerald-600"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4">Acesso Multi-provedor</h3>
-                    <p class="text-gray-300">Conecte-se a OpenAI, Anthropic, Google e outros provedores em uma única interface.</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Respostas Automáticas</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Configure respostas automáticas para perguntas frequentes e qualifique leads automaticamente.
+                    </p>
                 </div>
                 
-                <div class="card-hover bg-gray-800/50 p-8 rounded-xl border border-gray-700/50">
-                    <div class="gradient-bg w-12 h-12 rounded-lg flex items-center justify-center mb-6">
-                        <i data-lucide="shield-check" class="w-6 h-6 text-white"></i>
+                <!-- Feature 2 -->
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-clock text-2xl text-blue-600"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4">Dados Seguros</h3>
-                    <p class="text-gray-300">Seus dados nunca são usados para treinamento. Conexões diretas e criptografadas com cada provedor.</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Atendimento 24/7</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Seu chatbot trabalha 24 horas por dia, capturando leads mesmo quando você está dormindo.
+                    </p>
                 </div>
                 
-                <div class="card-hover bg-gray-800/50 p-8 rounded-xl border border-gray-700/50">
-                    <div class="gradient-bg w-12 h-12 rounded-lg flex items-center justify-center mb-6">
-                        <i data-lucide="users" class="w-6 h-6 text-white"></i>
+                <!-- Feature 3 -->
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-user-check text-2xl text-purple-600"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4">Agentes Especializados</h3>
-                    <p class="text-gray-300">Serviço de criação de agentes especializados nas regras de negócio de sua empresa.</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Qualificação de Leads</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Identifique automaticamente os melhores prospects e direcione para sua equipe de vendas.
+                    </p>
                 </div>
                 
-                <div class="card-hover bg-gray-800/50 p-8 rounded-xl border border-gray-700/50">
-                    <div class="gradient-bg w-12 h-12 rounded-lg flex items-center justify-center mb-6">
-                        <i data-lucide="bar-chart-3" class="w-6 h-6 text-white"></i>
+                <!-- Feature 4 -->
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-bar text-2xl text-yellow-600"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4">Converse com os últimos modelos lançados</h3>
-                    <p class="text-gray-300">Utilize modelos no primeiro dia de seu lançamento, assim que disponibilizados para o público.</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Relatórios</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Solicite métricas importantes como taxa de conversão, tempo de resposta e volume de mensagens.
+                    </p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-2xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Segurança Garantida</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Proteção completa dos dados dos seus clientes com criptografia de ponta a ponta.
+                    </p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-rocket text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Integração Rápida</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Setup completo em apenas 1 hora. Nosso time te ajuda em cada passo do caminho.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Como Funciona Section -->
-    <section id="como-funciona" class="py-20">
+    <!-- Benefits Section -->
+    <section id="beneficios" class="py-20 hero-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="text-white space-y-8">
+                    <h2 class="text-3xl md:text-4xl font-bold leading-tight">
+                        Transforme Visitantes em
+                        <span class="text-green-300">Clientes Pagantes</span>
+                    </h2>
+                    
+                    <p class="text-xl text-emerald-100 leading-relaxed">
+                        Nossos clientes veem resultados imediatos. Automatize seu funil de vendas e converta mais leads em vendas com nosso chatbot inteligente.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-white-300 mr-4 text-xl"></i>
+                            <span class="text-lg">Automatização completa do primeiro contato</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-white-300 mr-4 text-xl"></i>
+                            <span class="text-lg">Qualificação inteligente de prospects</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-white-300 mr-4 text-xl"></i>
+                            <span class="text-lg">Integração nativa com WhatsApp</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-white-300 mr-4 text-xl"></i>
+                            <span class="text-lg">Relatórios via solicitação</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-white-300 mr-4 text-xl"></i>
+                            <span class="text-lg">Suporte técnico especializado</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-white-300 mr-4 text-xl"></i>
+                            <span class="text-lg">Retorno sobre investimento comprovado em 30 dias</span>
+                        </div>
+                    </div>
+                    
+                   <button class="btn-secondary px-8 py-4 rounded-lg text-lg font-semibold bg-transparent">
+                        <i class="fas fa-play mr-2"></i>
+                        Começar Agora
+                    </button>
+                </div>
+                
+                <!-- Right Content - Stats -->
+                <div class="grid grid-cols-1 gap-8">
+                    <div class="text-center bg-black/50 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+                        <div class="stats-counter">4800</div>
+                        <p class="text-emerald-100 text-lg font-medium">Atendimentos realizados em um mês</p>
+                    </div>
+                    
+                    <div class="text-center bg-black/50 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+                        <div class="stats-counter">28000</div>
+                        <p class="text-emerald-100 text-lg font-medium">Mensagens respondidas em um mês</p>
+                    </div>
+                    
+                    <div class="text-center bg-black/50 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+                        <div class="stats-counter">24/7</div>
+                        <p class="text-emerald-100 text-lg font-medium">Disponibilidade de atendimento</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Testimonial Section -->
+    <section class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                    Como <span class="gradient-text">Funciona</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    O que nossos clientes dizem
                 </h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Três passos simples para transformar sua experiência com IA
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Empresas de todos os tamanhos confiam na Nexa para automatizar seu atendimento e aumentar suas vendas
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="gradient-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <span class="text-2xl font-bold text-white">1</span>
+            <div class="testimonials-container">
+                <!-- Testimonial Card 1 -->
+                <div class="testimonial-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 card-hover">
+                    <div class="flex justify-center mb-4">
+                        <div class="flex space-x-1">
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-4">Levantamento de Requisitos</h3>
-                    <p class="text-gray-300 text-lg">
-                        Escolha seu modelo de IA favorito e escolha com quantos usuários você quer começar.
+                    
+                    <p class="text-gray-700 leading-relaxed italic mb-6 text-center">
+                        "O chatbot é impressionante! Ele identifica dúvidas do cliente e propõe soluções automaticamente, o que aumentou nossa eficiência em 40%."
                     </p>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-bold text-sm"><img src="assets/fokustecnologia.jpg" alt=""></span>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-gray-900 text-sm">Victor Albuquerque</p>
+                            <p class="text-gray-600 text-sm">CEO, Fokus Tecnologia</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <span class="text-2xl font-bold text-emerald-500">4.9/5</span>
+                    </div>
                 </div>
                 
-                <div class="text-center">
-                    <div class="gradient-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <span class="text-2xl font-bold text-white">2</span>
+                <!-- Testimonial Card 2 -->
+                <div class="testimonial-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 card-hover">
+                    <div class="flex justify-center mb-4">
+                        <div class="flex space-x-1">
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-4">Converse e Colabore</h3>
-                    <p class="text-gray-300 text-lg">
-                        Use o serviço como se usa qualquer outro chat, mas com a segurança de que seus dados estão protegidos.
+                    
+                    <p class="text-gray-700 leading-relaxed italic mb-6 text-center">
+                        "Implementamos a Nexa e em 30 dias já vimos 200% de aumento na qualificação de leads. O ROI foi imediato!"
                     </p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="gradient-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <span class="text-2xl font-bold text-white">3</span>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-bold text-sm"><img src="assets/grupoimperial__logo.jpg" alt=""></span>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-gray-900 text-sm">Jean Clécio</p>
+                            <p class="text-gray-600 text-sm">CTO, Grupo Imperial Bebidas</p>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-4">Acesso Centralizado</h3>
-                    <p class="text-gray-300 text-lg">
-                        Acesse os modelos contratados em uma interface centralizada, com segurança e privacidade garantidas.
-                    </p>
+                    
+                    <div class="mt-4 text-center">
+                        <span class="text-2xl font-bold text-emerald-500">5.0/5</span>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Preços Section -->
-    <section id="precos" class="py-20 bg-gray-900/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                    Planos e <span class="gradient-text">Preços</span>
-                </h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Escolha o plano ideal para sua empresa
-                </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Plano Teste -->
-                <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700/50">
-                    <h3 class="text-2xl font-bold mb-4">Lite</h3>
-                    <div class="mb-6">
-                        <span class="text-4xl font-bold">R$ 20</span>
-                        <span class="text-gray-300">/usuário/mês</span>
+            <!-- Overall Rating Summary -->
+            <div class="mt-16 text-center">
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 max-w-md mx-auto">
+                    <div class="flex justify-center mb-4">
+                        <div class="flex space-x-1">
+                            <i class="fas fa-star text-yellow-400 text-2xl"></i>
+                            <i class="fas fa-star text-yellow-400 text-2xl"></i>
+                            <i class="fas fa-star text-yellow-400 text-2xl"></i>
+                            <i class="fas fa-star text-yellow-400 text-2xl"></i>
+                            <i class="fas fa-star text-yellow-400 text-2xl"></i>
+                        </div>
                     </div>
-                    <ul class="space-y-3 mb-8">
-                         <li class="flex items-center">
-                            <i data-lucide="check" class="w-5 h-5 text-green-400 mr-3"></i>
-                            <span>Acesso a todos os modelos de IA</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check" class="w-5 h-5 text-green-400 mr-3"></i>
-                            <span>Até 10 usuários</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check" class="w-5 h-5 text-green-400 mr-3"></i>
-                            <span>25.000 tokens/usuário/mês</span>
-                        </li>
-                        
-                    </ul>
-                    <a href="http://wa.me/+5562993027586", target="_blank">
-                    <button class="w-full border border-white/30 text-white py-3 rounded-lg hover:bg-white/10 transition-colors">
-                        Escolher Lite
-                    </button>
-                    </a>
-                </div>
-                
-                <!-- Plano Pro -->
-                <div class="bg-gray-800/50 p-8 rounded-xl border-2 border-purple-500 relative">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span class="gradient-bg px-4 py-1 rounded-full text-sm font-semibold">Mais Popular</span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Pro</h3>
-                    <div class="mb-6">
-                        <span class="text-4xl font-bold">R$ 15</span>
-                        <span class="text-gray-300">/usuário/mês</span>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center">
-                            <i data-lucide="check" class="w-5 h-5 text-green-400 mr-3"></i>
-                            <span>Acesso a todos os modelos de IA</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check" class="w-5 h-5 text-green-400 mr-3"></i>
-                            <span>De 10 a 50 usuários</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check" class="w-5 h-5 text-green-400 mr-3"></i>
-                            <span>35.000 tokens/usuário/mês</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check" class="w-5 h-5 text-green-400 mr-3"></i>
-                            <span>Criação de Agentes Especializados</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check" class="w-5 h-5 text-green-400 mr-3"></i>
-                            <span>Suporte prioritário</span>
-                        </li>
-                    </ul>
-                    <a href="http://wa.me/+5562993027586", target="_blank">
-                    <button class="w-full gradient-bg text-white py-3 rounded-lg hover:opacity-90 transition-opacity">
-                        Escolher Pro
-                    </button>
-                    </a>   
-                </div>
-                
-                <!-- Plano Corporativo -->
-                <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700/50">
-                    <h3 class="text-2xl font-bold mb-4">Corporativo</h3>
-                    <div class="mb-6">
-                        <span class="text-4xl font-bold">Custom</span>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center">
-                            <i data-lucide="check" class="w-5 h-5 text-green-400 mr-3"></i>
-                            <span>Acesso a todos os modelos de IA</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check" class="w-5 h-5 text-green-400 mr-3"></i>
-                            <span>Volume personalizado</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check" class="w-5 h-5 text-green-400 mr-3"></i>
-                            <span>Integrações inclusas</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check" class="w-5 h-5 text-green-400 mr-3"></i>
-                            <span>SLA garantido</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check" class="w-5 h-5 text-green-400 mr-3"></i>
-                            <span>Suporte dedicado</span>
-                        </li>
-                    </ul>
-                    <a href="http://wa.me/+5562993027586", target="_blank">
-                        <button class="w-full border border-white/30 text-white py-3 rounded-lg hover:bg-white/10 transition-colors">
-                        Falar com Vendas
-                    </button>
-                    </a>
+                    <div class="text-4xl font-bold text-emerald-500 mb-2">4.9/5</div>
+                    <p class="text-gray-600 mb-2">Feedback positivo em 98% dos atendimentos</p>
+                    <p class="text-sm text-gray-500">Empresas confiam na Nexa</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Depoimentos Section -->
-    <section class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                    O que nossos <span class="gradient-text">clientes dizem</span>
-                </h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700/50">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center mr-4">
-                            <span class="text-white font-bold">VA</span>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Victor Albuquerque</h4>
-                            <p class="text-gray-400 text-sm">CEO, Fokus Tecnologia</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-300">
-                        "A Nexus transformou nossa abordagem de IA. Finalmente temos controle total sobre nossos dados enquanto acessamos os melhores modelos do mercado."
-                    </p>
-                </div>
-                
-                <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700/50">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-400 rounded-full flex items-center justify-center mr-4">
-                            <span class="text-white font-bold">JS</span>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Igor Faria</h4>
-                            <p class="text-gray-400 text-sm">CEO, InnovaCorp</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-300">
-                        "A segurança e compliance que precisávamos, com a flexibilidade de escolher o melhor modelo para cada tarefa. Excelente!"
-                    </p>
-                </div>
-                
-                <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700/50">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-cyan-400 to-pink-400 rounded-full flex items-center justify-center mr-4">
-                            <span class="text-white font-bold">AS</span>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Ana Santos</h4>
-                            <p class="text-gray-400 text-sm">CIO, DataTech</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-300">
-                        "Interface intuitiva, relatórios detalhados e suporte excepcional. A Nexus é essencial para nossa estratégia de IA."
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="py-20 bg-gray-900/50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                    Perguntas <span class="gradient-text">Frequentes</span>
-                </h2>
-            </div>
-            
-            <div class="space-y-4">
-                <div class="faq-item bg-gray-800/50 rounded-xl border border-gray-700/50">
-                    <button class="faq-question w-full text-left p-6 flex justify-between items-center">
-                        <span class="text-lg font-semibold">Como vocês garantem a segurança dos nossos dados?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i>
-                    </button>
-                    <div class="faq-answer p-6 pt-0">
-                        <p class="text-gray-300">
-                            Utilizamos as APIs para desenvolvedores dos provedores de LLM, garantindo que seus dados nunca sejam usados para treinamento. Também temos um banco de dados criptografado e acesso controlado.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="faq-item bg-gray-800/50 rounded-xl border border-gray-700/50">
-                    <button class="faq-question w-full text-left p-6 flex justify-between items-center">
-                        <span class="text-lg font-semibold">O que acontece quando meus tokens acabam?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i>
-                    </button>
-                    <div class="faq-answer p-6 pt-0">
-                        <p class="text-gray-300">
-                            Você continua usando o chat normalmente. Os tokens que passarem do limite do plano serão cobrados à parte, de acordo com o uso e o modelo de IA escolhido.
-                        </p>
-                    </div>
-                </div>
-                <div class="faq-item bg-gray-800/50 rounded-xl border border-gray-700/50">
-                    <button class="faq-question w-full text-left p-6 flex justify-between items-center">
-                        <span class="text-lg font-semibold">Quais provedores de LLM vocês suportam?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i>
-                    </button>
-                    <div class="faq-answer p-6 pt-0">
-                        <p class="text-gray-300">
-                            Atualmente suportamos os principais provedores, como: OpenAI (GPT-4), Anthropic (Claude), Google (Gemini) e estamos constantemente adicionando novos provedores conforme a demanda do mercado.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="faq-item bg-gray-800/50 rounded-xl border border-gray-700/50">
-                    <button class="faq-question w-full text-left p-6 flex justify-between items-center">
-                        <span class="text-lg font-semibold">Como funciona o controle de acesso da equipe?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i>
-                    </button>
-                    <div class="faq-answer p-6 pt-0">
-                        <p class="text-gray-300">
-                            Nosso serviço utiliza os principais métodos de autenticação presentes no mercado — como por exemplo, o SSO da Microsoft.
-                        </p>
-                    </div>
-                </div>
-                <div class="faq-item bg-gray-800/50 rounded-xl border border-gray-700/50">
-                    <button class="faq-question w-full text-left p-6 flex justify-between items-center">
-                        <span class="text-lg font-semibold">Vocês oferecem integração com sistemas existentes?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i>
-                    </button>
-                    <div class="faq-answer p-6 pt-0">
-                        <p class="text-gray-300">
-                            Estamos trabalhando para oferecer integração com as principais ferramentas corporativas no mercado. Integrações personalizadas estão disponíveis para clientes corporativos.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contato Section -->
-    <section id="contato" class="py-20">
+    <!-- CTA Section -->
+    <section id="contato" class="py-20 hero-gradient">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                Pronto para <span class="gradient-text">começar?</span>
-            </h2>
-            <p class="text-xl text-gray-300 mb-12">
-                Entre em contato conosco e descubra como a Nexus pode transformar sua experiência com IA
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <a href="http://wa.me/+5562993027586" target="_blank" 
-                   class="gradient-bg text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity flex items-center">
-                    <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i>
-                    Falar com Vendas no WhatsApp
-                </a>
+            <div class="text-white space-y-8">
+                <h2 class="text-3xl md:text-4xl font-bold leading-tight">
+                    Pronto para Automatizar seu
+                    <span class="text-emerald-300">Atendimento no WhatsApp?</span>
+                </h2>
                 
-                <a href="mailto:contato@corpnexus.com.br" 
-                   class="border border-white/30 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/10 transition-colors flex items-center">
-                    <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
-                    contato@corpnexus.com.br
-                </a>
+                <p class="text-xl text-emerald-100 leading-relaxed max-w-2xl mx-auto">
+                    Junte-se a centenas de empresas que já automatizaram suas vendas. Comece seu teste hoje mesmo!
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="btn-secondary px-8 py-4 rounded-lg text-lg font-semibold bg-transparent">
+                        <i class="fas fa-play mr-2"></i>
+                        Começar Agora
+                    </button>
+                    <button class="btn-secondary px-8 py-4 rounded-lg text-lg font-semibold bg-transparent">
+                        <i class="fas fa-video mr-2"></i>
+                        Solicitar Demonstração
+                    </button>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-8 text-sm text-emerald-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        Sem compromisso
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        Cancelamento a qualquer momento
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        Suporte especializado incluído
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black/50 py-12 border-t border-gray-800">
+    <footer class="bg-gray-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="col-span-1 md:col-span-2">
-                    <h3 class="text-2xl font-bold gradient-text mb-4">Nexus Corporation</h3>
-                    <p class="text-gray-300 mb-4">
-                        Prover acesso seguro e integrado às melhores tecnologias de IA para transformar 
-                        a forma como as empresas se comunicam e tomam decisões.
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Logo and Description -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4 hover:text-emerald-400 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle text-primary">
+                                    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z">
+                                    </path>
+                                </svg>
+                        <span class="text-xl font-bold ">Nexa</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed max-w-md">
+                        Automatize seu atendimento no WhatsApp com inteligência artificial. Aumente suas vendas 24/7 com nosso chatbot inteligente.
                     </p>
                 </div>
                 
+                <!-- Quick Links -->
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Política de Privacidade</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Termos de Uso</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Documentação</a></li>
+                    <h3 class="font-semibold mb-4">Links Rápidos</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#funcionalidades" class="hover:text-emerald-400 transition-colors">Funcionalidades</a></li>
+                        <li><a href="#beneficios" class="hover:text-emerald-400 transition-colors">Benefícios</a></li>
                     </ul>
                 </div>
                 
+                <!-- Contact -->
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Redes Sociais</h4>
-                    <div class="flex space-x-4">
-                        <a href="https://www.linkedin.com", target="_blank" class="text-gray-300 hover:text-white transition-colors">
-                            <i data-lucide="linkedin" class="w-6 h-6"></i>
-                        </a>
-                        <a href="https://www.x.com/home", target="_blank" class="text-gray-300 hover:text-white transition-colors">
-                            <i data-lucide="twitter" class="w-6 h-6"></i>
-                        </a>
-                    </div>
+                    <h3 class="font-semibold mb-4">Contato</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center hover:text-emerald-400 transition-colors">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <a href="mailto:contato@corpnexus.com.br" class="hover:text-emerald-400 transition-colors">
+                                 contato@corpnexus.com.br
+                            </a>
+                        </li>
+                        <li class="flex items-center hover:text-emerald-400 transition-colors">
+                            <i class="fab fa-whatsapp mr-2"></i>
+                            <a href="https://wa.me/5562994324486" class="hover:text-emerald-400 transition-colors" target="_blank">(62) 99432-4486</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
-                <p class="text-gray-400">
-                    © 2024 Nexus Corporation. Todos os direitos reservados.
-                </p>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 hover:text-emerald-400 transition-colors">
+                <p>&copy; 2025 Nexus Corporation. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>

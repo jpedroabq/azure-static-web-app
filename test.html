@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexa - Automatize seu Atendimento no WhatsApp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #6366f1 100%);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .stats-counter {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">Nexa</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#funcionalidades" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">Funcionalidades</a>
+                        <a href="#beneficios" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">Benefícios</a>
+                        <a href="#contato" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">Contato</a>
+                        <button class="btn-primary text-white px-6 py-2 rounded-lg text-sm font-medium">
+                            Começar Agora
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-blue-600 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-full bg-white shadow-xl z-40">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#funcionalidades" class="block text-gray-700 hover:text-blue-600 py-2 text-sm font-medium">Funcionalidades</a>
+                <a href="#beneficios" class="block text-gray-700 hover:text-blue-600 py-2 text-sm font-medium">Benefícios</a>
+                <a href="#contato" class="block text-gray-700 hover:text-blue-600 py-2 text-sm font-medium">Contato</a>
+                <button class="btn-primary text-white px-6 py-2 rounded-lg text-sm font-medium w-full">
+                    Começar Agora
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient pt-20 pb-16 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+                <!-- Left Content -->
+                <div class="text-white space-y-8">
+                    <div class="space-y-2">
+                        <p class="text-blue-200 text-sm font-medium flex items-center">
+                            <i class="fas fa-bolt mr-2"></i>
+                            Automatize seu atendimento
+                        </p>
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                            Atendimento Inteligente para
+                            <span class="text-yellow-300">WhatsApp</span>
+                        </h1>
+                    </div>
+                    
+                    <p class="text-xl text-blue-100 leading-relaxed">
+                        Automatize respostas, qualifique leads e aumente suas vendas 24/7 com nosso chatbot inteligente para WhatsApp. Integração fácil e resultados imediatos.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="btn-primary text-white px-8 py-4 rounded-lg text-lg font-semibold flex items-center justify-center">
+                            <i class="fas fa-play mr-2"></i>
+                            Começar Agora
+                        </button>
+                        <button class="btn-secondary px-8 py-4 rounded-lg text-lg font-semibold flex items-center justify-center bg-transparent">
+                            <i class="fas fa-video mr-2"></i>
+                            Solicitar Demonstração
+                        </button>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-6 text-sm">
+                        <div class="flex items-center text-blue-200">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Setup em 5 minutos
+                        </div>
+                        <div class="flex items-center text-blue-200">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Sem programação
+                        </div>
+                        <div class="flex items-center text-blue-200">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Suporte Premium
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Content - Robot Illustration -->
+                <div class="flex justify-center lg:justify-end">
+                    <div class="relative">
+                        <div class="w-80 h-80 bg-gradient-to-br from-blue-400 to-purple-600 rounded-3xl flex items-center justify-center animate-float">
+                            <div class="text-8xl text-white">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="absolute -top-4 -right-4 w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center animate-pulse-slow">
+                                <i class="fab fa-whatsapp text-2xl text-white"></i>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-blue-400 rounded-full animate-pulse"></div>
+                        <div class="absolute top-8 -left-8 w-8 h-8 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 1s;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="funcionalidades" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Funcionalidades Poderosas
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Tudo que você precisa para automatizar seu atendimento e aumentar suas vendas
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-comments text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Respostas Automáticas</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Configure respostas automáticas para perguntas frequentes e qualifique leads automaticamente.
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-clock text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Atendimento 24/7</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Seu chatbot trabalha 24 horas por dia, capturando leads mesmo quando você está dormindo.
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-user-check text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Qualificação de Leads</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Identifique automaticamente os melhores prospects e direcione para sua equipe de vendas.
+                    </p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-bar text-2xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Relatórios</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Solicite métricas importantes como taxa de conversão, tempo de resposta e volume de mensagens.
+                    </p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-2xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Segurança Garantida</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Proteção completa dos dados dos seus clientes com criptografia de ponta a ponta.
+                    </p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="card-hover bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-rocket text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Integração Rápida</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Setup completo em apenas 30 minutos. Nosso time te ajuda em cada passo do caminho.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="beneficios" class="py-20 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="text-white space-y-8">
+                    <h2 class="text-3xl md:text-4xl font-bold leading-tight">
+                        Transforme Visitantes em
+                        <span class="text-yellow-300">Clientes Pagantes</span>
+                    </h2>
+                    
+                    <p class="text-xl text-blue-100 leading-relaxed">
+                        Nossos clientes veem resultados imediatos. Automatize seu funil de vendas e converta mais leads em vendas com nosso chatbot inteligente.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-300 mr-4 text-xl"></i>
+                            <span class="text-lg">Automatização completa do primeiro contato</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-300 mr-4 text-xl"></i>
+                            <span class="text-lg">Qualificação inteligente de prospects</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-300 mr-4 text-xl"></i>
+                            <span class="text-lg">Integração nativa com WhatsApp</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-300 mr-4 text-xl"></i>
+                            <span class="text-lg">Relatórios via solicitação</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-300 mr-4 text-xl"></i>
+                            <span class="text-lg">Suporte técnico especializado</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-300 mr-4 text-xl"></i>
+                            <span class="text-lg">Retorno sobre investimento comprovado em 30 dias</span>
+                        </div>
+                    </div>
+                    
+                    <button class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                        Começar Agora
+                    </button>
+                </div>
+                
+                <!-- Right Content - Stats -->
+                <div class="grid grid-cols-1 gap-8">
+                    <div class="text-center bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+                        <div class="stats-counter">300%</div>
+                        <p class="text-emerald-100 text-lg font-medium">Aumento em leads qualificados</p>
+                    </div>
+                    
+                    <div class="text-center bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+                        <div class="stats-counter">85%</div>
+                        <p class="text-emerald-100 text-lg font-medium">Redução no custo de atendimento</p>
+                    </div>
+                    
+                    <div class="text-center bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+                        <div class="stats-counter">24/7</div>
+                        <p class="text-emerald-100 text-lg font-medium">Disponibilidade de atendimento</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    O que nossos clientes dizem
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Empresas de todos os tamanhos confiam na Nexa para automatizar seu atendimento e aumentar suas vendas
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial Card 1 -->
+                <div class="testimonial-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 card-hover">
+                    <div class="flex justify-center mb-4">
+                        <div class="flex space-x-1">
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed italic mb-6 text-center">
+                        "O chatbot é impressionante! Ele identifica dúvidas do cliente e propõe soluções automaticamente, o que aumentou nossa eficiência em 40%."
+                    </p>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-bold text-sm">VA</span>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-gray-900 text-sm">Victor Albuquerque</p>
+                            <p class="text-gray-600 text-sm">CEO, Fokus Tecnologia</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <span class="text-2xl font-bold text-blue-600">4.9/5</span>
+                    </div>
+                </div>
+                
+                <!-- Testimonial Card 2 -->
+                <div class="testimonial-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 card-hover">
+                    <div class="flex justify-center mb-4">
+                        <div class="flex space-x-1">
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed italic mb-6 text-center">
+                        "Implementamos a Nexa e em 30 dias já vimos 200% de aumento na qualificação de leads. O ROI foi imediato!"
+                    </p>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-bold text-sm">MS</span>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-gray-900 text-sm">Maria Silva</p>
+                            <p class="text-gray-600 text-sm">Diretora de Marketing, TechCorp</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <span class="text-2xl font-bold text-blue-600">5.0/5</span>
+                    </div>
+                </div>
+                
+                <!-- Testimonial Card 3 -->
+                <div class="testimonial-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 card-hover">
+                    <div class="flex justify-center mb-4">
+                        <div class="flex space-x-1">
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed italic mb-6 text-center">
+                        "A automação do atendimento nos permitiu focar no que realmente importa: fechar negócios. Recomendo 100%!"
+                    </p>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-bold text-sm">RC</span>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-gray-900 text-sm">Roberto Costa</p>
+                            <p class="text-gray-600 text-sm">Gerente de Vendas, SalesMax</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <span class="text-2xl font-bold text-blue-600">4.8/5</span>
+                    </div>
+                </div>
+                
+                <!-- Testimonial Card 4 -->
+                <div class="testimonial-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 card-hover">
+                    <div class="flex justify-center mb-4">
+                        <div class="flex space-x-1">
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed italic mb-6 text-center">
+                        "Setup super fácil e suporte excepcional. Em uma semana já estávamos operando com 85% menos custos de atendimento."
+                    </p>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-bold text-sm">AF</span>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-gray-900 text-sm">Ana Ferreira</p>
+                            <p class="text-gray-600 text-sm">COO, StartupHub</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <span class="text-2xl font-bold text-blue-600">4.9/5</span>
+                    </div>
+                </div>
+                
+                <!-- Testimonial Card 5 -->
+                <div class="testimonial-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 card-hover">
+                    <div class="flex justify-center mb-4">
+                        <div class="flex space-x-1">
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed italic mb-6 text-center">
+                        "Nossos clientes adoram a rapidez das respostas. O chatbot funciona 24/7 e nunca falha. Investimento que vale a pena!"
+                    </p>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-bold text-sm">LS</span>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-gray-900 text-sm">Lucas Santos</p>
+                            <p class="text-gray-600 text-sm">Fundador, E-commerce Plus</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <span class="text-2xl font-bold text-blue-600">5.0/5</span>
+                    </div>
+                </div>
+                
+                <!-- Testimonial Card 6 -->
+                <div class="testimonial-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 card-hover">
+                    <div class="flex justify-center mb-4">
+                        <div class="flex space-x-1">
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                            <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed italic mb-6 text-center">
+                        "A integração foi perfeita e os resultados superaram nossas expectativas. Triplicamos nossa taxa de conversão!"
+                    </p>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-bold text-sm">CP</span>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-gray-900 text-sm">Carla Pereira</p>
+                            <p class="text-gray-600 text-sm">Head de Growth, DigitalFlow</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <span class="text-2xl font-bold text-blue-600">4.9/5</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Overall Rating Summary -->
+            <div class="mt-16 text-center">
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 max-w-md mx-auto">
+                    <div class="flex justify-center mb-4">
+                        <div class="flex space-x-1">
+                            <i class="fas fa-star text-yellow-400 text-2xl"></i>
+                            <i class="fas fa-star text-yellow-400 text-2xl"></i>
+                            <i class="fas fa-star text-yellow-400 text-2xl"></i>
+                            <i class="fas fa-star text-yellow-400 text-2xl"></i>
+                            <i class="fas fa-star text-yellow-400 text-2xl"></i>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold text-blue-600 mb-2">4.9/5</div>
+                    <p class="text-gray-600 mb-2">Baseado em 500+ avaliações</p>
+                    <p class="text-sm text-gray-500">Empresas confiam na Nexa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contato" class="py-20 gradient-bg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="text-white space-y-8">
+                <h2 class="text-3xl md:text-4xl font-bold leading-tight">
+                    Pronto para Automatizar seu
+                    <span class="text-yellow-300">Atendimento no WhatsApp?</span>
+                </h2>
+                
+                <p class="text-xl text-emerald-100 leading-relaxed max-w-2xl mx-auto">
+                    Junte-se a centenas de empresas que já automatizaram suas vendas. Comece seu teste hoje mesmo!
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-play mr-2"></i>
+                        Começar Agora
+                    </button>
+                    <button class="btn-secondary px-8 py-4 rounded-lg text-lg font-semibold bg-transparent">
+                        <i class="fas fa-video mr-2"></i>
+                        Solicitar Demonstração
+                    </button>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-8 text-sm text-emerald-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        Sem compromisso
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        Cancelamento a qualquer momento
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        Suporte especializado incluído
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Logo and Description -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold">Nexa</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed max-w-md">
+                        Automatize seu atendimento no WhatsApp com inteligência artificial. Aumente suas vendas 24/7 com nosso chatbot inteligente.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-semibold mb-4">Links Rápidos</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#funcionalidades" class="hover:text-blue-400 transition-colors">Funcionalidades</a></li>
+                        <li><a href="#beneficios" class="hover:text-blue-400 transition-colors">Benefícios</a></li>
+                        <li><a href="#contato" class="hover:text-blue-400 transition-colors">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="font-semibold mb-4">Contato</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            contato@nexa.com.br
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-whatsapp mr-2"></i>
+                            (11) 99999-9999
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Nexa. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
